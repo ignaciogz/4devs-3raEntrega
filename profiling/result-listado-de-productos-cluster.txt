@@ -1,0 +1,186 @@
+Statistical profiling result from isolate-listado-de-productos.log, (14232 ticks, 0 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+  13688   96.2%          C:\Windows\SYSTEM32\ntdll.dll
+    532    3.7%          C:\Program Files\nodejs\node.exe
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+      5    0.0%   41.7%  LazyCompile: *resolve node:path:158:10
+      1    0.0%    8.3%  LazyCompile: *normalizeString node:path:66:25
+      1    0.0%    8.3%  LazyCompile: *nextPart node:fs:2384:31
+      1    0.0%    8.3%  LazyCompile: *Module._nodeModulePaths node:internal/modules/cjs/loader:583:37
+      1    0.0%    8.3%  Function: ^hrtime node:internal/process/per_thread:67:18
+      1    0.0%    8.3%  Function: ^hasHooks node:internal/async_hooks:460:18
+      1    0.0%    8.3%  Function: ^getOwn node:internal/bootstrap/loaders:180:16
+      1    0.0%    8.3%  Function: ^deserializeObject D:\Desarrollo\PROYECTOS\4devs\node_modules\bson\lib\parser\deserializer.js:65:27
+
+ [C++]:
+   ticks  total  nonlib   name
+
+ [Summary]:
+   ticks  total  nonlib   name
+     12    0.1%  100.0%  JavaScript
+      0    0.0%    0.0%  C++
+     54    0.4%  450.0%  GC
+  14220   99.9%          Shared libraries
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+  13688   96.2%  C:\Windows\SYSTEM32\ntdll.dll
+
+    532    3.7%  C:\Program Files\nodejs\node.exe
+    421   79.1%    C:\Program Files\nodejs\node.exe
+    149   35.4%      Function: ^compileFunction node:vm:308:25
+    149  100.0%        Function: ^wrapSafe node:internal/modules/cjs/loader:1017:18
+    148   99.3%          Function: ^Module._compile node:internal/modules/cjs/loader:1055:37
+    147   99.3%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+     28    6.7%      Function: ^stat node:internal/modules/cjs/loader:151:14
+     16   57.1%        Function: ^tryFile node:internal/modules/cjs/loader:384:17
+     11   68.8%          Function: ^tryExtensions node:internal/modules/cjs/loader:400:23
+     11  100.0%            Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+      3   18.8%          LazyCompile: *Module._findPath node:internal/modules/cjs/loader:494:28
+      3  100.0%            Function: ^Module._resolveFilename node:internal/modules/cjs/loader:848:35
+      1    6.3%          LazyCompile: ~tryPackage node:internal/modules/cjs/loader:338:20
+      1  100.0%            Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+      1    6.3%          Function: ^tryPackage node:internal/modules/cjs/loader:338:20
+      1  100.0%            Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+     12   42.9%        Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+     12  100.0%          Function: ^Module._resolveFilename node:internal/modules/cjs/loader:848:35
+     12  100.0%            Function: ^Module._load node:internal/modules/cjs/loader:757:24
+     27    6.4%      Function: ^realpathSync node:fs:2408:22
+     27  100.0%        Function: ^toRealPath node:internal/modules/cjs/loader:393:20
+     21   77.8%          Function: ^tryFile node:internal/modules/cjs/loader:384:17
+     20   95.2%            Function: ^tryExtensions node:internal/modules/cjs/loader:400:23
+      1    4.8%            LazyCompile: *Module._findPath node:internal/modules/cjs/loader:494:28
+      6   22.2%          Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+      6  100.0%            Function: ^Module._resolveFilename node:internal/modules/cjs/loader:848:35
+     23    5.5%      Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+     18   78.3%        Function: ^nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      2   11.1%          LazyCompile: ~setupChannel node:internal/child_process:569:22
+      2  100.0%            LazyCompile: ~_forkChild node:child_process:170:20
+      2   11.1%          LazyCompile: ~lazyLoadStreams node:fs:2841:25
+      2  100.0%            LazyCompile: ~get ReadStream node:fs:2984:17
+      2   11.1%          Function: ~<anonymous> node:assert:1:1
+      2  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    5.6%          LazyCompile: ~lazyRequire node:internal/crypto/util:67:21
+      1  100.0%            LazyCompile: ~get node:crypto:287:8
+      1    5.6%          LazyCompile: ~initializeCJSLoader node:internal/bootstrap/pre_execution:421:29
+      1  100.0%            LazyCompile: ~prepareMainThreadExecution node:internal/bootstrap/pre_execution:22:36
+      1    5.6%          LazyCompile: ~get node:dns:334:8
+      1  100.0%            C:\Program Files\nodejs\node.exe
+      1    5.6%          Function: ~<anonymous> node:tls:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    5.6%          Function: ~<anonymous> node:internal/process/esm_loader:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    5.6%          Function: ~<anonymous> node:internal/modules/esm/module_map:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    5.6%          Function: ~<anonymous> node:internal/modules/esm/loader:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    5.6%          Function: ~<anonymous> node:internal/modules/esm/load:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    5.6%          Function: ~<anonymous> node:internal/crypto/pbkdf2:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    5.6%          Function: ~<anonymous> node:internal/child_process:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    5.6%          Function: ~<anonymous> node:crypto:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    5.6%          Function: ~<anonymous> node:cluster:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      4   17.4%        Function: ^compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      4  100.0%          Function: ^loadNativeModule node:internal/modules/cjs/helpers:44:26
+      4  100.0%            Function: ^Module._load node:internal/modules/cjs/loader:757:24
+      1    4.3%        LazyCompile: ~compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      1  100.0%          LazyCompile: ~loadNativeModule node:internal/modules/cjs/helpers:44:26
+      1  100.0%            LazyCompile: ~Module._load node:internal/modules/cjs/loader:757:24
+     12    2.9%      C:\Program Files\nodejs\node.exe
+      2   16.7%        Function: ^readPackage node:internal/modules/cjs/loader:290:21
+      2  100.0%          Function: ^readPackageScope node:internal/modules/cjs/loader:321:26
+      1   50.0%            Function: ^trySelf node:internal/modules/cjs/loader:441:17
+      1   50.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      1    8.3%        LazyCompile: ~resolveOptions D:\Desarrollo\PROYECTOS\4devs\node_modules\mongodb\lib\utils.js:826:24
+      1  100.0%          LazyCompile: ~createIndex D:\Desarrollo\PROYECTOS\4devs\node_modules\mongodb\lib\collection.js:253:16
+      1  100.0%            LazyCompile: ~setAutoRemove D:\Desarrollo\PROYECTOS\4devs\node_modules\connect-mongo\build\main\lib\MongoStore.js:138:18
+      1    8.3%        LazyCompile: ~isIPv6 node:internal/net:35:16
+      1  100.0%          LazyCompile: ~isIP node:internal/net:39:14
+      1  100.0%            LazyCompile: ~lookupAndConnect node:net:995:26
+      1    8.3%        LazyCompile: ~MongoStore D:\Desarrollo\PROYECTOS\4devs\node_modules\connect-mongo\build\main\lib\MongoStore.js:75:16
+      1  100.0%          LazyCompile: ~create D:\Desarrollo\PROYECTOS\4devs\node_modules\connect-mongo\build\main\lib\MongoStore.js:135:18
+      1  100.0%            Function: ~<anonymous> D:\Desarrollo\PROYECTOS\4devs\server.js:1:1
+      1    8.3%        LazyCompile: ~<anonymous> D:\Desarrollo\PROYECTOS\4devs\node_modules\lodash\lodash.js:17077:47
+      1  100.0%          LazyCompile: ~<anonymous> D:\Desarrollo\PROYECTOS\4devs\node_modules\lodash\lodash.js:4959:22
+      1  100.0%            LazyCompile: ~baseForOwn D:\Desarrollo\PROYECTOS\4devs\node_modules\lodash\lodash.js:3031:24
+      1    8.3%        Function: ~<anonymous> D:\Desarrollo\PROYECTOS\4devs\node_modules\mquery\node_modules\debug\src\node.js:1:1
+      1  100.0%          Function: ^Module._compile node:internal/modules/cjs/loader:1055:37
+      1  100.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      1    8.3%        Function: ^stat node:internal/modules/cjs/loader:151:14
+      1  100.0%          Function: ^tryFile node:internal/modules/cjs/loader:384:17
+      1  100.0%            Function: ^tryExtensions node:internal/modules/cjs/loader:400:23
+      1    8.3%        Function: ^splitRoot node:fs:2358:33
+      1  100.0%          Function: ^realpathSync node:fs:2408:22
+      1  100.0%            Function: ^toRealPath node:internal/modules/cjs/loader:393:20
+      1    8.3%        Function: ^realpathSync node:fs:2408:22
+      1  100.0%          Function: ^toRealPath node:internal/modules/cjs/loader:393:20
+      1  100.0%            Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+      1    8.3%        Function: ^fromString D:\Desarrollo\PROYECTOS\4devs\node_modules\mongodb\lib\utils.js:456:22
+      1  100.0%          Function: ^ns D:\Desarrollo\PROYECTOS\4devs\node_modules\mongodb\lib\utils.js:434:12
+      1  100.0%            Function: ^measureRoundTripTime D:\Desarrollo\PROYECTOS\4devs\node_modules\mongodb\lib\sdam\monitor.js:281:30
+      1    8.3%        Function: ^FastBuffer node:internal/buffer:958:14
+      1  100.0%          Function: ^createUnsafeBuffer node:internal/buffer:1059:28
+      1  100.0%            Function: ^createPool node:buffer:150:20
+      9    2.1%      Function: ^readSync node:fs:684:18
+      9  100.0%        Function: ^tryReadSync node:fs:429:21
+      9  100.0%          Function: ^readFileSync node:fs:450:22
+      8   88.9%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      1   11.1%            LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      8    1.9%      LazyCompile: ~configSecureContext node:internal/tls/secure-context:120:29
+      8  100.0%        LazyCompile: ~createSecureContext node:_tls_common:99:29
+      8  100.0%          LazyCompile: ~connect node:_tls_wrap:1597:35
+      8  100.0%            LazyCompile: ~makeConnection D:\Desarrollo\PROYECTOS\4devs\node_modules\mongodb\lib\cmap\connect.js:247:24
+      8    1.9%      Function: ^openSync node:fs:576:18
+      8  100.0%        Function: ^readFileSync node:fs:450:22
+      8  100.0%          Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      8  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:969:33
+      6    1.4%      LazyCompile: ~Module._extensions..json node:internal/modules/cjs/loader:1158:39
+      6  100.0%        Function: ^Module.load node:internal/modules/cjs/loader:969:33
+      6  100.0%          Function: ^Module._load node:internal/modules/cjs/loader:757:24
+      6  100.0%            Function: ^Module.require node:internal/modules/cjs/loader:997:36
+      6    1.4%      Function: ^deserializeObject D:\Desarrollo\PROYECTOS\4devs\node_modules\bson\lib\parser\deserializer.js:65:27
+      3   50.0%        Function: ^deserializeObject D:\Desarrollo\PROYECTOS\4devs\node_modules\bson\lib\parser\deserializer.js:65:27
+      2   66.7%          Function: ^deserializeObject D:\Desarrollo\PROYECTOS\4devs\node_modules\bson\lib\parser\deserializer.js:65:27
+      2  100.0%            Function: ^deserialize D:\Desarrollo\PROYECTOS\4devs\node_modules\bson\lib\parser\deserializer.js:36:21
+      1   33.3%          Function: ^deserialize D:\Desarrollo\PROYECTOS\4devs\node_modules\bson\lib\parser\deserializer.js:36:21
+      1  100.0%            Function: ^deserialize D:\Desarrollo\PROYECTOS\4devs\node_modules\bson\lib\bson.js:162:21
+      3   50.0%        Function: ^deserialize D:\Desarrollo\PROYECTOS\4devs\node_modules\bson\lib\parser\deserializer.js:36:21
+      3  100.0%          Function: ^deserialize D:\Desarrollo\PROYECTOS\4devs\node_modules\bson\lib\bson.js:162:21
+      2   66.7%            Function: ^parse D:\Desarrollo\PROYECTOS\4devs\node_modules\mongodb\lib\cmap\commands.js:577:10
+      1   33.3%            LazyCompile: ~parse D:\Desarrollo\PROYECTOS\4devs\node_modules\mongodb\lib\cmap\commands.js:384:10
+      5    1.2%      LazyCompile: ~isatty node:tty:42:16
+      3   60.0%        LazyCompile: ~useColors D:\Desarrollo\PROYECTOS\4devs\node_modules\body-parser\node_modules\debug\src\node.js:75:19
+      3  100.0%          LazyCompile: ~createDebug D:\Desarrollo\PROYECTOS\4devs\node_modules\body-parser\node_modules\debug\src\debug.js:63:21
+      1   33.3%            Function: ~<anonymous> D:\Desarrollo\PROYECTOS\4devs\node_modules\body-parser\lib\types\text.js:1:1
+      1   33.3%            Function: ~<anonymous> D:\Desarrollo\PROYECTOS\4devs\node_modules\body-parser\lib\types\raw.js:1:1
+      1   33.3%            Function: ~<anonymous> D:\Desarrollo\PROYECTOS\4devs\node_modules\body-parser\lib\types\json.js:1:1
+      2   40.0%        LazyCompile: ~useColors D:\Desarrollo\PROYECTOS\4devs\node_modules\express\node_modules\debug\src\node.js:75:19
+      2  100.0%          LazyCompile: ~createDebug D:\Desarrollo\PROYECTOS\4devs\node_modules\express\node_modules\debug\src\debug.js:63:21
+      1   50.0%            Function: ~<anonymous> D:\Desarrollo\PROYECTOS\4devs\node_modules\express\lib\router\layer.js:1:1
+      1   50.0%            Function: ~<anonymous> D:\Desarrollo\PROYECTOS\4devs\node_modules\express\lib\router\index.js:1:1
+      5    1.2%      LazyCompile: ~Resolver node:internal/dns/utils:53:14
+      5  100.0%        Function: ~<anonymous> node:internal/dns/utils:1:1
+      5  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      5  100.0%            Function: ^nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      5    1.2%      Function: ^read node:internal/modules/package_json_reader:16:14
+      5  100.0%        Function: ^readPackage node:internal/modules/cjs/loader:290:21
+      4   80.0%          Function: ^resolveExports node:internal/modules/cjs/loader:472:24
+      4  100.0%            Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+      1   20.0%          Function: ^readPackageScope node:internal/modules/cjs/loader:321:26
+      1  100.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+

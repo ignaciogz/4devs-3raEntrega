@@ -1,0 +1,42 @@
+section.slider {
+    .slider-container {
+        img {
+            height: 300px;
+            width: 100%;
+            position: relative;
+
+            @media (min-width: 600px) {
+                height: 385px;
+            }
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--light-blue);
+        }
+
+        .content {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+
+            .title {
+                color: var(--white);
+                font-family: "Russo One";
+                font-size: 2rem;
+                text-shadow:
+                    -2px -2px 0 var(--black),  
+                    2px -2px 0 var(--black),
+                    -2px 2px 0 var(--black),
+                    2px 2px 0 var(--black);
+    
+                @media (min-width: 600px) {
+                    font-size: 3rem;
+                }
+              }
+
+            @media (min-width: 600px) {
+                bottom: 1rem;
+            }
+        }
+    }
+}
