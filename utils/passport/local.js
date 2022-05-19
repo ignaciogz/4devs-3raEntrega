@@ -44,7 +44,7 @@ passportLocal.use('registerLocal', new LocalStrategy({ passReqToCallback: true }
             direccion: req.body.direccion,
             edad: Number(req.body.edad),
             telefono: Number(req.body.telefono),
-            foto: req.file.path,
+            foto: req.file.filename,
             administrator: false
         }
 
