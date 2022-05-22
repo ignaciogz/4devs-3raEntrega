@@ -1,4 +1,4 @@
-class ProductsMw {
+class Products {
     access(req, res ,next) {
         const method = req.method;
     
@@ -13,4 +13,4 @@ class ProductsMw {
     }
 }
 
-module.exports = new ProductsMw();
+module.exports = new Products();

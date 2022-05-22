@@ -2,8 +2,8 @@ const { args, DB, config } = require('./config');
 
 const express = require("express");
 const app = express();
-const ServerMw = require('./utils/middlewares/ServerMw');
 const serverRoutes = require('./routes');
+const serverMw = require('./utils/middlewares/serverMiddleware');
 
 // ↓ ****** INICIO - CORS ****** ↓
 const cors = require('cors')
@@ -53,8 +53,7 @@ app.use(passportLocal.session());
 
 serverRoutes(app);
 
-app.use(ServerMw.routeNotImplemented);
-
+app.use(serverMw.routeNotImplemented);
 
 // ↓ ****** INICIO - Clusters y Escalabilidad ****** ↓
 const cluster = require('cluster');

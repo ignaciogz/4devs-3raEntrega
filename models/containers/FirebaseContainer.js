@@ -1,35 +1,34 @@
-const { mongoose } = require('../../config/mongoDB');
-const { ArrayTools, TimeTools } = require('../tools');
+const { firestore } = require('../firebase');
+const { ArrayTools, TimeTools } = require('../../utils/tools');
 
-class MongoDBContainer {
-    constructor(modelName, schema) {
-        const schemaModel = new mongoose.Schema(schema);
-        this.model = new mongoose.model(modelName, schemaModel);
+class FirebaseContainer {
+    constructor(collectionName) {
+        this.collection = firestore.collection(collectionName);
+
+        this.#init();
     }
 
-    async #getNewID() {
-        try {
-            let lastID = await this.getAll().then(content => {
-                const elementsQty = content.length; 
-    
-                if (elementsQty > 0) {
-                    const lastElement = content[elementsQty-1];
-                    return lastElement.id;
-                }
-    
-                return 0;
-            });
-    
-            return ++lastID;   
-        } catch (error) {
-            console.log("Error #getNewID() ", error);
-        }
+    async #init() {
+        this.lastID = await this.getAll().then(content => {
+            const elementsQty = content.length;
+
+            if (elementsQty > 0) {
+                const lastElement = content[elementsQty-1];
+                return lastElement.id;
+            }
+
+            return 0; 
+        });
+    }
+
+    #getNewID() {
+        return ++this.lastID;
     }
 
     async getByID(id) {
         try {
-            const result = await this.model.find({id}).limit(1);
-            return result.shift();
+            const result = await this.collection.doc(`${id}`).get();
+            return result.data();
         } catch (error) {
             console.log("Error getById() ", error);
         }
@@ -37,7 +36,10 @@ class MongoDBContainer {
 
     async getAll() {
         try {
-            const result = await this.model.find({});
+            const response = await this.collection.get();
+            const docs = response.docs;
+            const result = docs.map(doc => doc.data());
+
             return result;
         } catch (error) {
             console.log("Error getAll() ", error);
@@ -46,10 +48,10 @@ class MongoDBContainer {
 
     async save(data) {
         try {
-            data.id = await this.#getNewID();
+            data.id = this.#getNewID();
             data.timestamp = TimeTools.getTimestamp();
 
-            await this.model.create(data);
+            await this.collection.doc(`${data.id}`).create(data);
 
             return data.id;
         } catch (error) {
@@ -62,7 +64,7 @@ class MongoDBContainer {
             data.id = parseInt(id);
             data.timestamp = TimeTools.getTimestamp();
 
-            await this.model.updateOne({id}, data);
+            await this.collection.doc(`${id}`).update(data);
         } catch (error) {
             console.log("Error update() ", error);
         }
@@ -70,7 +72,7 @@ class MongoDBContainer {
 
     async deleteById(id) {
         try {
-            await this.model.deleteMany({id});
+            await this.collection.doc(`${id}`).delete();
         } catch (error) {
             console.log("Error deleteById() ", error);
         }
@@ -78,7 +80,8 @@ class MongoDBContainer {
 
     async deleteAll() {
         try {
-            await this.model.deleteMany({});
+            await this.collection.doc().delete();
+            this.lastID = 0;
         } catch (error) {
             console.log("Error deleteAll() ", error);
         }
@@ -96,4 +99,4 @@ class MongoDBContainer {
     }
 }
 
-module.exports = MongoDBContainer;
+module.exports = FirebaseContainer;

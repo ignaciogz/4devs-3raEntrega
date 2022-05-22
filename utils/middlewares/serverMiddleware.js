@@ -1,4 +1,4 @@
-class ServerMw {
+class Server {
     routeNotImplemented(req, res, next) {
         res.status(404).json({
             error: '-2', 
@@ -7,4 +7,4 @@ class ServerMw {
     }
 }
 
-module.exports = new ServerMw();
+module.exports = new Server();

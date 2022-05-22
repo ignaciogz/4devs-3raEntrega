@@ -6,7 +6,7 @@
     "artillery": "artillery quick --count 20 -n 50 http://localhost:8080/",
     "prof-fork": "node --prof server.js -p 8080",
     "prof-cluster": "node --prof server.js -p 8080 -m CLUSTER",
-    "process": "node --prof-process isolate-listado-de-productos.log > profiling/result-listado-de-productos.txt",
+    "process": "node --prof-process isolate-listado-de-productos.log > data/profiling/result-listado-de-productos.txt",
     "dev": "nodemon server.js -p 8080",
     "start": "node server.js",
     "start-local": "node server.js -p 8080"

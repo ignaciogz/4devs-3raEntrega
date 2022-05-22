@@ -1,6 +1,8 @@
-const { cartsDao } = require('../../../utils/daos');
+const { cartsDao } = require('../../../models/daos');
 const { ArrayTools, TimeTools } = require('../../../utils/tools');
 const { errorLog: loggerWinston } = require("../../../utils/loggers/winston");
+
+const productsService = require('../../products/services/productsService');
 
 class Cart {
     constructor() {
@@ -33,9 +35,10 @@ class Cart {
         }
     }
 
-    async add(id, item) {
+    async add(id, id_prod) {
         try {
             const cart = await this.getID(id);
+            const item = await productsService.getID(id_prod);
         
             item.timestamp = TimeTools.getTimestamp();
             cart.items.push(item);

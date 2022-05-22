@@ -1,14 +1,6 @@
-const authServices = require('../services/authServices');
+const authService = require('../services/authService');
 
 class Auth {
-    getLogin(req, res, next) {
-        res.json({ Pagina: "Login" });
-    }
-
-    getRegistro(req, res, next) {
-        res.json({ Pagina: "Registro" });
-    }
-
     isLogged(req, res, next) {
         if(req.isAuthenticated()) {
             res.json({ isLogged: true });
@@ -18,7 +10,7 @@ class Auth {
     }
 
     error(req, res, next) {
-        res.json({ Error: "Un Mensaje de error" });
+        res.json({ Error: "Error en autenticacion" });
     }
 
     logout(req, res, next) {

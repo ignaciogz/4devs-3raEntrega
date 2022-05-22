@@ -1,10 +1,10 @@
 const passportLocal = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-const { authDao: storage } = require('../daos');
+const { usersDao: storage } = require('../../models/daos');
 const { AuthTools } = require("../tools");
 const { errorLog: loggerWinston } = require("../loggers/winston");
-const { mailAdmin_nuevoUsuario } = require('../../config/nodeMailer');
+const mailer = require('../notificators/mailer');
 
 // ↓ ****** INICIO - PASSPORT-LOCAL ****** ↓
 passportLocal.use('loginLocal', new LocalStrategy(async (username, password, done) => {
@@ -48,7 +48,7 @@ passportLocal.use('registerLocal', new LocalStrategy({ passReqToCallback: true }
             administrator: false
         }
 
-        mailAdmin_nuevoUsuario(newUser);
+        mailer.sendNewUser(newUser);
     
         await storage.save(newUser);
         
@@ -63,8 +63,12 @@ passportLocal.serializeUser((user, done) => {
 });
 
 passportLocal.deserializeUser(async (username, done) => {
-    const user = await storage.getByUserName(username);
-    done(null, user);
+    try {
+        const user = await storage.getByUserName(username);
+        done(null, user);   
+    } catch (error) {
+        loggerWinston.error(`Passport Local -> Ejecutando: 'deserializeUser' || Error: ${error.message}`)
+    }
 });
 // ↑ ****** FIN - PASSPORT-LOCAL ****** ↑
 

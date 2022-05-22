@@ -1,6 +1,6 @@
 const express = require('express');
 const usersController = require('./controllers/usersController');
-const authMw = require('../../utils/middlewares/AuthMw');
+const authMw = require('../auth/middlewares/authMiddleware');
 
 module.exports = app => {
     const router = express.Router();

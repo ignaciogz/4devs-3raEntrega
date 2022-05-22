@@ -1,4 +1,4 @@
-class AuthMw {
+class Auth {
     isAuth(req, res, next) {
         if(req.isAuthenticated()){
             next();
@@ -16,4 +16,4 @@ class AuthMw {
     }
 }
 
-module.exports = new AuthMw();
+module.exports = new Auth();

@@ -1,7 +1,7 @@
 const MongoDBContainer = require('../../containers/MongoDBContainer');
 const usersSchema = require('../../schemas/nosql/users');
 
-class AuthDaoMongoDB extends MongoDBContainer {
+class UsersDaoMongoDB extends MongoDBContainer {
     constructor() {
         super("users", usersSchema);
     }
@@ -20,4 +20,4 @@ class AuthDaoMongoDB extends MongoDBContainer {
     }
 }
 
-module.exports = AuthDaoMongoDB;
+module.exports = UsersDaoMongoDB;

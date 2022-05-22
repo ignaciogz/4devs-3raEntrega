@@ -1,4 +1,4 @@
-const { productsDao } = require('../../../utils/daos');
+const { productsDao } = require('../../../models/daos');
 const { errorLog: loggerWinston } = require("../../../utils/loggers/winston");
 
 class Products {

@@ -1,6 +1,7 @@
 const express = require('express');
 const authController = require('./controllers/authController');
-const authMw = require('../../utils/middlewares/AuthMw');
+const authMw = require('./middlewares/authMiddleware');
+
 const { passportLocal } = require('../../utils/passport/local');
 const { uploadFile } = require('../../utils/multer');
 

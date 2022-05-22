@@ -1,32 +1,35 @@
-const knex = require("knex");
-const { ArrayTools, TimeTools } = require('../tools');
+const { mongoose } = require('../../config/mongoDB');
+const { ArrayTools, TimeTools } = require('../../utils/tools');
 
-class RelationalDBContainer {
-    constructor(table, config, schema) {
-        this.table = table;
-        this.client = knex(config);
-        this.schema = schema;
-
-        this.#init();
+class MongoDBContainer {
+    constructor(modelName, schema) {
+        const schemaModel = new mongoose.Schema(schema);
+        this.model = new mongoose.model(modelName, schemaModel);
     }
 
-    async #init() {
+    async #getNewID() {
         try {
-            const tableExist = await this.client.schema.hasTable(this.table);
-            if(!tableExist) {
-                await this.client.schema.createTable(this.table, table => this.schema(table));
-            } else {
-                console.log(`Table "${this.table}" already exist !`);
-            }
+            let lastID = await this.getAll().then(content => {
+                const elementsQty = content.length; 
+    
+                if (elementsQty > 0) {
+                    const lastElement = content[elementsQty-1];
+                    return lastElement.id;
+                }
+    
+                return 0;
+            });
+    
+            return ++lastID;   
         } catch (error) {
-            console.log("Error #init() on RelationalDBContainer", error);
+            console.log("Error #getNewID() ", error);
         }
     }
 
     async getByID(id) {
         try {
-            const result = await this.client.from(this.table).where("id", id).limit(1);
-            return result.shift();   
+            const result = await this.model.find({id}).limit(1);
+            return result.shift();
         } catch (error) {
             console.log("Error getById() ", error);
         }
@@ -34,7 +37,7 @@ class RelationalDBContainer {
 
     async getAll() {
         try {
-            const result = await this.client.from(this.table);
+            const result = await this.model.find({});
             return result;
         } catch (error) {
             console.log("Error getAll() ", error);
@@ -43,11 +46,12 @@ class RelationalDBContainer {
 
     async save(data) {
         try {
+            data.id = await this.#getNewID();
             data.timestamp = TimeTools.getTimestamp();
 
-            const insertID = await this.client.from(this.table).insert(data, 'id');
+            await this.model.create(data);
 
-            return insertID.shift();
+            return data.id;
         } catch (error) {
             console.log("Error save() ", error);
         }
@@ -57,8 +61,8 @@ class RelationalDBContainer {
         try {
             data.id = parseInt(id);
             data.timestamp = TimeTools.getTimestamp();
-            
-            await this.client.from(this.table).where("id", id).update(data);
+
+            await this.model.updateOne({id}, data);
         } catch (error) {
             console.log("Error update() ", error);
         }
@@ -66,16 +70,15 @@ class RelationalDBContainer {
 
     async deleteById(id) {
         try {
-            await this.client.from(this.table).where("id", id).del();
+            await this.model.deleteMany({id});
         } catch (error) {
             console.log("Error deleteById() ", error);
         }
-        
     }
 
     async deleteAll() {
         try {
-            await this.client.from(this.table).del();
+            await this.model.deleteMany({});
         } catch (error) {
             console.log("Error deleteAll() ", error);
         }
@@ -93,4 +96,4 @@ class RelationalDBContainer {
     }
 }
 
-module.exports = RelationalDBContainer;
+module.exports = MongoDBContainer;

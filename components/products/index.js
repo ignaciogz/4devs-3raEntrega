@@ -1,6 +1,6 @@
 const express = require('express');
 const productsController = require('./controllers/productsController');
-const ProductsMw = require('../../utils/middlewares/ProductsMw');
+const ProductsMw = require('./middlewares/productsMiddleware');
 
 module.exports = app => {
     const router = express.Router();

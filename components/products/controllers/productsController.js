@@ -1,22 +1,22 @@
-const productsServices = require('../services/productsServices');
+const productsService = require('../services/productsService');
 
 class Products {
     async getAll(req, res, next) {
-        const products = await productsServices.getAll();
+        const products = await productsService.getAll();
         res.json({ products });
     };
 
     async getID(req, res, next) {
         const { id } = req.params;
     
-        const product = await productsServices.getID(id);
+        const product = await productsService.getID(id);
         res.json({ product });
     };
     
     async add(req, res, next) {
         const newProduct = req.body;
     
-        const id = await productsServices.add(newProduct);
+        const id = await productsService.add(newProduct);
         res.json({ id });
     };
     
@@ -24,14 +24,14 @@ class Products {
         const { id } = req.params;
         const modifiedProduct = req.body;
         
-        await productsServices.update(parseInt(id), modifiedProduct);
+        await productsService.update(parseInt(id), modifiedProduct);
         res.json({});
     };
     
     async delete(req, res, next) {
         const { id } = req.params;
         
-        await productsServices.delete(id);
+        await productsService.delete(id);
         res.json({});
     };
 
@@ -39,7 +39,7 @@ class Products {
     async productExist(req, res ,next) {
         const { id } = req.params;
     
-        const productExist = await productsServices.productIDExist(id)
+        const productExist = await productsService.productIDExist(id)
         productExist ? next() : res.json({ error : 'producto no encontrado' });
     }
 }
