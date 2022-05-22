@@ -17,12 +17,12 @@ class Cart {
         const cart = await cartService.getID(id);
         const detail = cartService.getDetail(cart);
         
-        //mailer.send_NewOrder(req.user, detail);
+        mailer.send_NewOrder(req.user, detail);
         twilio.sendWPP_NewOrder(req.user);
-        //twilio.sendSMS_NewOrder(req.user);
+        twilio.sendSMS_NewOrder(req.user);
 
         await cartService.delete(id);
-        
+
         res.json({});
     }
     
