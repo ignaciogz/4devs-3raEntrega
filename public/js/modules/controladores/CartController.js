@@ -54,8 +54,12 @@ class CartController {
             e.preventDefault();
             
             const res = Request.POST(`/api/carrito/${Global.cartId}/checkout`);
-            res.then(data => {
-                location = "/#";
+            res.then(result => {
+                const dataCreatedCart = Request.POST("/api/carrito");
+                dataCreatedCart.then(data => {
+                    Global.cartId = data.id;
+                    location = "/#";
+                });
             });
         });
     }
